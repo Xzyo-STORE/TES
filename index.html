@@ -235,8 +235,17 @@ input:focus, textarea:focus {
 
 /* Checkmark SVG */
 .checkmark {
-    width: 120px;
-    height: 120px;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
 }
 
 /* Lingkaran checkmark */
