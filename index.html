@@ -179,17 +179,6 @@ input:focus, textarea:focus {
     color: var(--main);
     z-index: 10;
 }
-/* Coretan saat password di-show */
-.eye.show::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    background: var(--main);
-    top: 8px;
-    left: 0;
-    transform: rotate(-45deg);
-}
          
 /* PAY AREA */
 #pay-area {
@@ -642,13 +631,17 @@ if (showQrisBtn && qrisArea && closeQrisBtn) {
 }
 
      // ======== eye slash =====
-     if (input.type === "password") {
-    input.type = "text";
-    eye.classList.replace("fa-eye", "fa-eye-slash");
-} else {
-    input.type = "password";
-    eye.classList.replace("fa-eye-slash", "fa-eye");
-}
+     function togglePw() {
+        let pw = document.getElementById("pw");
+        let eye = document.getElementById("eye");
+        if (pw.type === "password") {
+            pw.type = "text";
+            eye.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+            pw.type = "password";
+            eye.classList.replace("fa-eye", "fa-eye-slash");
+        }
+    }
 </script>
 </body>
 </html>
