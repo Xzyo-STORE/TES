@@ -1,282 +1,630 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XZYO STORE | JOKI BLOX FRUITS</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-:root {
---main:#00d2ff;
---premium:#3a7bd5;
---dark:#020617;
---green:#4ade80;
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XZYO STORE | JOKI BLOX FRUITS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MASUKAN STYLE DISINI -->
+    <style>
+    :root {
+    --main: #00d2ff;
+    --premium: #3a7bd5;
+    --dark: #020617;
+    --text-light: #cbd5e1;
+    --green: #4ade80;
+    --hover-bg: rgba(0, 210, 255, 0.08);
 }
 
-body{
-font-family:Arial, sans-serif;
-background:var(--dark);
-color:white;
-margin:0;
-padding:15px;
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: white;
+    margin: 0;
+    padding: 15px;
 }
 
-.container{
-max-width:1200px;
-margin:auto;
-display:flex;
-flex-direction:column;
-gap:20px;
+/* CONTAINER */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+@media (min-width: 900px) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .side {
+        flex: 1.2;
+        position: sticky;
+        top: 15px;
+    }
+    .main-form {
+        flex: 0.8;
+    }
 }
 
-@media(min-width:900px){
-.container{flex-direction:row;}
-.side{flex:1.2;position:sticky;top:15px;}
-.main-form{flex:0.8;}
+/* CARD */
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
+}
+.card:hover {
+    box-shadow: 0 15px 50px rgba(0, 210, 255, 0.4);
 }
 
-.card{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:15px;
-padding:25px;
-box-shadow:0 10px 40px rgba(0,0,0,0.6);
+h2, h3 {
+    color: var(--main);
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-h2,h3{
-color:var(--main);
-margin-top:0;
+/* INPUT */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #000;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+input:focus, textarea:focus {
+    border-color: var(--main);
+    box-shadow: 0 0 10px var(--main);
 }
 
-input,textarea{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #333;
-background:#000;
-color:white;
-box-sizing:border-box;
+/* SCROLLABLE LIST */
+.scroll-list {
+    max-height: 550px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+.scroll-list::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-list::-webkit-scrollbar-thumb {
+    background: var(--main);
+    border-radius: 10px;
 }
 
-.pass-box{position:relative;}
-.eye{
-position:absolute;
-right:12px;
-top:22px;
-cursor:pointer;
-color:var(--main);
+/* CATEGORY TITLE */
+.category-title {
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.2), transparent);
+    padding: 8px 12px;
+    margin: 15px 0 5px 0;
+    font-weight: bold;
+    font-size: 13px;
+    border-left: 4px solid var(--main);
+    color: var(--main);
+    text-transform: uppercase;
+    border-radius: 5px;
 }
 
-.btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:10px;
-background:linear-gradient(45deg,var(--main),var(--premium));
-color:white;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
+/* PRICE LIST ITEM */
+.price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
-.item-joki{
-display:flex;
-justify-content:space-between;
-padding:10px;
-margin:5px 0;
-background:rgba(255,255,255,0.05);
-border-radius:8px;
-cursor:pointer;
+.item-joki {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    border-left: 4px solid transparent;
 }
 
-.item-joki:hover{
-background:rgba(0,210,255,0.1);
+.item-joki:hover {
+    background: var(--hover-bg);
+    border-left: 4px solid var(--main);
 }
 
-#orderSuccessOverlay{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.9);
-z-index:9999;
-justify-content:center;
-align-items:center;
+.item-joki.active {
+    background: linear-gradient(90deg, var(--main), var(--premium));
+    color: white;
+    border-left: 4px solid var(--premium);
 }
 
-.checkmark-container{
-text-align:center;
-animation:fadeInScale .5s ease forwards;
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--main), var(--premium));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+.btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
 }
 
-.checkmark{
-width:120px;
-height:120px;
+/* PASSWORD BOX */
+.pass-box {
+    position: relative;
+}
+.eye {
+    position: absolute;
+    right: 12px;
+    top: 22px;
+    cursor: pointer;
+    color: var(--main);
+    z-index: 10;
 }
 
-.checkmark-circle{
-stroke:#4ade80;
-stroke-width:4;
-fill:none;
-stroke-dasharray:339;
-stroke-dashoffset:339;
-animation:drawCircle .6s forwards;
+/* PAY AREA */
+#pay-area {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+    animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+#pay-area img {
+    width: 180px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+#vm {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.checkmark-check{
-stroke:#4ade80;
-stroke-width:4;
-fill:none;
-stroke-dasharray:40;
-stroke-dashoffset:40;
-animation:drawCheck .7s .6s forwards;
+/* RESPONSIVE SPACING */
+@media (max-width: 900px) {
+    .side, .main-form {
+        flex: unset;
+        position: unset;
+    }
+}
+/* Overlay fullscreen */
+#orderSuccessOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes drawCircle{to{stroke-dashoffset:0;}}
-@keyframes drawCheck{to{stroke-dashoffset:0;}}
-@keyframes fadeInScale{from{opacity:0;transform:scale(.5);}to{opacity:1;transform:scale(1);}}
-</style>
+/* Container checkmark */
+.checkmark-container {
+    text-align: center;
+    color: #fff;
+    animation: fadeInScale 0.5s ease forwards;
+    overflow: visible; /* pastikan stroke tidak terpotong */
+}
+
+/* Checkmark SVG */
+.checkmark {
+    width: 120px;
+    height: 120px;
+}
+
+/* Lingkaran checkmark */
+.checkmark-circle {
+    stroke: #4ade80;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 339; /* keliling lingkaran */
+    stroke-dashoffset: 339;
+    stroke-linecap: round;
+    animation: drawCircle 0.6s forwards;
+}
+
+/* Garis checkmark */
+.checkmark-check {
+    stroke: #4ade80;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 40; /* panjang garis check */
+    stroke-dashoffset: 40;
+    stroke-linecap: round;
+    animation: drawCheck 0.7s 0.6s forwards; /* delay setelah circle */
+}
+
+/* Keyframes animasi */
+@keyframes drawCircle { to { stroke-dashoffset: 0; } }
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+@keyframes fadeInScale { from {opacity:0; transform:scale(0.5);} to {opacity:1; transform:scale(1);} }
+
+.btn { padding: 12px 20px; background: linear-gradient(45deg,#00d2ff,#3a7bd5); border:none; border-radius:10px; color:white; cursor:pointer; font-weight:bold; margin-top:10px; }
+        .payment-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    border-left: 4px solid #00d2ff;
+}
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <div class="main-form card">
+        <h2><i class="fa-solid fa-gamepad"></i>ORDER FORM</h2>
+        <form action="https://formspree.io/f/xzyostore@gmail.com" method="POST" id="jokiForm">
+            <input type="text" name="USN_RBLX" placeholder="USN RBLX" required>
+            <div class="pass-box">
+                <input type="password" name="PW_RBLX" id="p" placeholder="PW RBLX" required>
+                <i class="fas fa-eye eye" onclick="document.getElementById('p').type = (document.getElementById('p').type === 'password' ? 'text' : 'password')"></i>
+            </div>
+            <input type="number" name="NO_WA" placeholder="NO WA (08xxx)" required>
+            <textarea name="JOKI_APA_LEK" rows="3" placeholder="JOKI APA LEK? (Tulis detail pesananmu di sini)" required></textarea>
+            <input type="file" name="buktiPembayaran" accept="image/*,.pdf" required>
+            
+           <div class="voucher-area">
+             <input type="text" id="voucherInput" placeholder="Masukkan kode promo">
+             <button id="applyBtn">Gunakan</button>
+             <small id="voucherMessage" style="display:block; margin-top:5px;"></small>
+           </div>
+   
+           <!-- Tombol ORDER -->
+              <button id="orderBtn" class="btn">ORDER</button>
 
-<div class="main-form card">
-<h2>ORDER FORM</h2>
+           <!-- Fullscreen Checkmark Overlay -->
+        <div id="orderSuccessOverlay">
+           <div class="checkmark-container">
+               <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                 <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                 <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
+               </svg>
+             <h2>Order Sukses!</h2>
+             <p>Terima kasih, order kamu sudah tercatat.</p>
+           </div>
+        </div>
+        </form>
 
-<form action="https://formspree.io/f/xzyostore@gmail.com" method="POST" id="jokiForm">
+       <!-- Bar metode pembayaran langsung -->
+         <div class="payment-bar">
+           <div><b>DANA:</b> 089677329404</div>
+           <div><b>GOPAY / OVO:</b> 089517154561</div>
+         </div>
 
-<input type="text" name="USN_RBLX" placeholder="USN RBLX" required>
+       <!-- Tombol Scan QRIS -->
+<button id="showQrisBtn" class="btn" style="margin-top:10px;">Scan QRIS</button>
 
-<div class="pass-box">
-<input type="password" name="PW_RBLX" id="p" placeholder="PW RBLX" required>
-<i class="fas fa-eye eye" onclick="togglePass()"></i>
+<!-- Container QRIS -->
+<div id="qrisArea" style="display:none; margin-top:10px; text-align:center;">
+    <b style="font-size:16px;">SCAN QRIS XZYO STORE</b><br>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://drive.google.com/file/d/1emJk_GFVcRN6Dd0Mnha_MrNyGHxL8QLt/view" alt="QRIS" style="margin:10px 0; width:200px; height:200px;">
+    <br>
+    <button id="closeQrisBtn" class="btn">Tutup QRIS</button>
 </div>
+    </div>
 
-<input type="number" name="NO_WA" placeholder="NO WA" required>
+    <div class="side card">
+    <h3>🏴‍☠️ LIST JOKI BLOX FRUITS</h3>
+    <p style="font-size: 11px; opacity: 0.6; margin-top: -5px;">
+        Scroll ke bawah untuk lihat semua jasa
+    </p>
 
-<textarea name="DETAIL" rows="3" placeholder="Detail Joki..." required></textarea>
+    <div class="scroll-list">
 
-<input type="file" name="buktiPembayaran" required>
+        <!-- KEN HAKI -->
+        <div class="category-title">👁️ KEN HAKI (INSTINCT)</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Ken Haki 0-1k" data-price="5000">
+                <span>✦ 0 – 1.000</span><span>Rp 5.000</span>
+            </div>
+            <div class="item-joki" data-name="Ken Haki 1k-2k" data-price="8000">
+                <span>✦ 1.000 – 2.000</span><span>Rp 8.000</span>
+            </div>
+            <div class="item-joki" data-name="Ken Haki Max V2" data-price="15000">
+                <span>✦ 2.000 – 5.000 (MAX) + V2(Full)</span><span>Rp 15.000</span>
+            </div>
+            <div class="item-joki" data-name="Ken Haki 0-5k Full" data-price="20000">
+                <span>✦ 0 – 5.000 (MAX) + V2(Full)</span><span>Rp 20.000</span>
+            </div>
+        </div>
 
-<input type="text" id="voucherInput" placeholder="Kode Promo">
-<button type="button" id="applyBtn" class="btn">Gunakan Voucher</button>
+        <!-- JOKI BOUNTY / HONOR -->
+        <div class="category-title">🏴‍☠️ JOKI BOUNTY / HONOR</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Bounty 0.5M" data-price="10000">
+                <span>✦ 0.5M</span><span>Rp 10.000</span>
+            </div>
+            <div class="item-joki" data-name="Bounty 1M" data-price="20000">
+                <span>✦ 1M</span><span>Rp 20.000</span>
+            </div>
+            <div class="item-joki" data-name="Bounty 5M" data-price="90000">
+                <span>✦ 5M</span><span>Rp 90.000</span>
+            </div>
+            <div class="item-joki" data-name="Bounty 10M" data-price="180000">
+                <span>✦ 10M</span><span>Rp 180.000</span>
+            </div>
+        </div>
 
-<div style="margin-top:10px;font-weight:bold;">
-Total: <span id="totalDisplay">Rp 0</span>
+        <!-- JOKI BELLY -->
+        <div class="category-title">💸 JOKI BELLY</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Belly 1M" data-price="5000">
+                <span>✦ 1M</span><span>Rp 5.000</span>
+            </div>
+            <div class="item-joki" data-name="Belly 3M" data-price="10000">
+                <span>✦ 3M</span><span>Rp 10.000</span>
+            </div>
+            <div class="item-joki" data-name="Belly 10M" data-price="20000">
+                <span>✦ 10M</span><span>Rp 20.000</span>
+            </div>
+        </div>
+
+        <!-- JOKI FRAGMENT -->
+        <div class="category-title">🔮 JOKI FRAGMENT</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Fragment 1K" data-price="1000">
+                <span>✦ 1K</span><span>Rp 1.000</span>
+            </div>
+            <div class="item-joki" data-name="Fragment 5K" data-price="4000">
+                <span>✦ 5K</span><span>Rp 4.000</span>
+            </div>
+            <div class="item-joki" data-name="Fragment 10K" data-price="8000">
+                <span>✦ 10K</span><span>Rp 8.000</span>
+            </div>
+            <div class="item-joki" data-name="Fragment 20K" data-price="15000">
+                <span>✦ 20K</span><span>Rp 15.000</span>
+            </div>
+        </div>
+
+        <!-- JOKI LEVEL -->
+        <div class="category-title">🔥 JOKI LEVEL</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Level 0-100" data-price="3000">
+                <span>✦ 0 – 100</span><span>Rp 3.000</span>
+            </div>
+            <div class="item-joki" data-name="Level 1-700" data-price="15000">
+                <span>✦ 1 – 700</span><span>Rp 15.000</span>
+            </div>
+            <div class="item-joki" data-name="Level 700-1.500" data-price="15000">
+                <span>✦ 700 – 1.500</span><span>Rp 15.000</span>
+            </div>
+            <div class="item-joki" data-name="Level 1.500-MAX" data-price="20000">
+                <span>✦ 1.500 – MAX</span><span>Rp 20.000</span>
+            </div>
+        </div>
+
+        <!-- UNLOCK SEA -->
+        <div class="category-title">🌊 UNLOCK SEA</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Unlock Sea 2/3" data-price="5000">
+                <span>✦ Unlock Sea 2 / 3</span><span>Rp 5.000</span>
+            </div>
+        </div>
+
+        <!-- JOKI MASTERY -->
+        <div class="category-title">⚔️ JOKI MASTERY</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="100 Mastery" data-price="5000">
+                <span>✦ 100 Mastery (Fruit/Sword/FS)</span><span>Rp 5.000</span>
+            </div>
+        </div>
+
+        <!-- RAID SERVICE -->
+        <div class="category-title">💥 RAID SERVICE</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Raid Biasa Max" data-price="5000">
+                <span>✦ Raid Biasa (Max)</span><span>Rp 5.000</span>
+            </div>
+            <div class="item-joki" data-name="Raid Buddha/Dough Max" data-price="10000">
+                <span>✦ Raid Buddha / Dough (Max)</span><span>Rp 10.000</span>
+            </div>
+        </div>
+
+        <!-- EXCLUSIVE ITEM / BOSS -->
+        <div class="category-title">👑 EXCLUSIVE ITEM / BOSS</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Leviathan Heart/Scale" data-price="45000">
+                <span>✦ Leviathan Heart / Scale</span><span>Rp 45.000</span>
+            </div>
+            <div class="item-joki" data-name="Freeze Hydra" data-price="45000">
+                <span>✦ Freeze Hydra (Wajib Draco V3)</span><span>Rp 45.000</span>
+            </div>
+            <div class="item-joki" data-name="Blue Gear" data-price="10000">
+                <span>✦ Blue Gear</span><span>Rp 10.000</span>
+            </div>
+            <div class="item-joki" data-name="TOTS / Indra / D-King" data-price="10000">
+                <span>✦ TOTS / Indra / D-King</span><span>Rp 10.000</span>
+            </div>
+            <div class="item-joki" data-name="Tushita / Yama" data-price="8000">
+                <span>✦ Tushita / Yama</span><span>Rp 8.000</span>
+            </div>
+            <div class="item-joki" data-name="CDK" data-price="20000">
+                <span>✦ CDK (Cursed Dual Katana)</span><span>Rp 20.000</span>
+            </div>
+            <div class="item-joki" data-name="Soul Guitar / Godhuman" data-price="30000">
+                <span>✦ Soul Guitar / Godhuman</span><span>Rp 30.000</span>
+            </div>
+            <div class="item-joki" data-name="TTK" data-price="25000">
+                <span>✦ TTK (True Triple Katana)</span><span>Rp 25.000</span>
+            </div>
+            <div class="item-joki" data-name="Dragon Heart / Storm" data-price="20000">
+                <span>✦ Dragon Heart / Storm</span><span>Rp 20.000</span>
+            </div>
+            <div class="item-joki" data-name="Shark Anchor / Fox Lamp" data-price="30000">
+                <span>✦ Shark Anchor / Fox Lamp</span><span>Rp 30.000</span>
+            </div>
+            <div class="item-joki" data-name="Hallow Scythe / Dark Dagger" data-price="30000">
+                <span>✦ Hallow Scythe / Dark Dagger</span><span>Rp 30.000</span>
+            </div>
+            <div class="item-joki" data-name="Rengoku / Saber" data-price="5000">
+                <span>✦ Rengoku / Saber</span><span>Rp 5.000</span>
+            </div>
+        </div>
+
+        <!-- RACE SERVICE -->
+        <div class="category-title">🧬 RACE SERVICE</div>
+        <div class="price-list">
+            <div class="item-joki" data-name="Unlock Ghoul / Cyborg" data-price="15000">
+                <span>✦ Unlock Ghoul / Cyborg</span><span>Rp 15.000</span>
+            </div>
+            <div class="item-joki" data-name="Race V1-V3" data-price="8000">
+                <span>✦ Race V1 – V3</span><span>Rp 8.000</span>
+            </div>
+            <div class="item-joki" data-name="Race V4" data-price="10000">
+                <span>✦ Race V4</span><span>Rp 10.000</span>
+            </div>
+            <div class="item-joki" data-name="Draco Full" data-price="20000">
+                <span>✦ Draco (Full)</span><span>Rp 20.000</span>
+            </div>
+            <div class="item-joki" data-name="Draco V4" data-price="15000">
+                <span>✦ Draco V4</span><span>Rp 15.000</span>
+            </div>
+        </div>
+
+    </div>
 </div>
-
-<button type="submit" class="btn">ORDER</button>
-
-</form>
-
-</div>
-
-<div class="side card">
-<h3>LIST JOKI</h3>
-
-<div class="item-joki" data-price="5000">Ken Haki 0-1k <span>Rp 5.000</span></div>
-<div class="item-joki" data-price="10000">Bounty 1M <span>Rp 10.000</span></div>
-<div class="item-joki" data-price="15000">Level 1-700 <span>Rp 15.000</span></div>
-
-</div>
-
-</div>
-
-<!-- OVERLAY -->
-<div id="orderSuccessOverlay">
-<div class="checkmark-container">
-<svg class="checkmark" viewBox="0 0 52 52">
-<circle class="checkmark-circle" cx="26" cy="26" r="25"/>
-<path class="checkmark-check" d="M14 27l7 7 16-16"/>
-</svg>
-<h2>Order Sukses!</h2>
-</div>
-</div>
-
 <script>
+// ======= GLOBAL VARIABLES =======
+let selectedTotal = 0;
+let discountAmount = 0;
+let appliedVoucher = null;
 
-let selectedTotal=0;
-let discountAmount=0;
-let appliedVoucher=null;
-
-const vouchers={
-"FEB2026":10,
-"PROMO20":20,
-"VIP5":5
+const vouchers = {
+    "FEB2026": 10,
+    "PROMO20": 20,
+    "VIP5": 5
 };
 
-document.querySelectorAll(".item-joki").forEach(item=>{
-item.addEventListener("click",()=>{
-selectedTotal+=parseInt(item.dataset.price);
-updateTotal();
-});
+// ======= ITEM SELECTION =======
+document.querySelectorAll(".item-joki").forEach(item => {
+    item.addEventListener("click", function() {
+        const price = parseInt(this.dataset.price);
+        selectedTotal += price;
+        updateTotal();
+    });
 });
 
-function updateTotal(){
-let finalTotal=selectedTotal-discountAmount;
-if(finalTotal<0)finalTotal=0;
-document.getElementById("totalDisplay").innerText=
-"Rp "+finalTotal.toLocaleString("id-ID");
+// ======= UPDATE TOTAL =======
+function updateTotal() {
+    let finalTotal = selectedTotal - discountAmount;
+    if (finalTotal < 0) finalTotal = 0;
+
+    const totalEl = document.getElementById("totalDisplay");
+    if (totalEl) {
+        totalEl.innerText = "Rp " + finalTotal.toLocaleString("id-ID");
+    }
 }
 
-document.getElementById("applyBtn").addEventListener("click",()=>{
-if(appliedVoucher)return alert("Voucher sudah dipakai!");
+// ======= APPLY VOUCHER =======
+document.getElementById("applyBtn").addEventListener("click", function(e) {
+    e.preventDefault(); // supaya tidak submit form
+    if (appliedVoucher !== null) {
+        alert("Hanya bisa 1 voucher per transaksi!");
+        return;
+    }
 
-let code=document.getElementById("voucherInput").value.toUpperCase().trim();
+    const code = document.getElementById("voucherInput").value.toUpperCase().trim();
 
-if(!(code in vouchers))return alert("Kode tidak valid!");
+    if (!(code in vouchers)) {
+        alert("Kode tidak valid!");
+        return;
+    }
 
-discountAmount=selectedTotal*(vouchers[code]/100);
-appliedVoucher=code;
-updateTotal();
-alert("Voucher berhasil dipakai!");
+    if (selectedTotal === 0) {
+        alert("Pilih layanan dulu!");
+        return;
+    }
+
+    const percent = vouchers[code];
+    discountAmount = selectedTotal * (percent / 100);
+    appliedVoucher = code;
+    updateTotal();
+
+    alert("Voucher " + percent + "% berhasil digunakan!");
 });
 
-const form=document.getElementById("jokiForm");
-const overlay=document.getElementById("orderSuccessOverlay");
+// ======= ORDER FORM & CHECKMARK OVERLAY =======
+const demoForm = document.getElementById("jokiForm");
+const overlay = document.getElementById("orderSuccessOverlay");
 
-window.addEventListener("load",()=>overlay.style.display="none");
+demoForm.addEventListener("submit", async (e)=>{
+    e.preventDefault();
 
-form.addEventListener("submit",async function(e){
-e.preventDefault();
+    const formData = new FormData(demoForm);
 
-const formData=new FormData(form);
+    try {
+        await fetch(demoForm.action, {
+            method:'POST',
+            body:formData,
+            headers:{'Accept':'application/json'}
+        });
 
-try{
-const response=await fetch(form.action,{
-method:"POST",
-body:formData,
-headers:{'Accept':'application/json'}
+        overlay.style.display = "flex";
+
+        demoForm.reset();
+        selectedTotal = 0;
+        discountAmount = 0;
+        appliedVoucher = null;
+        updateTotal();
+
+        setTimeout(()=>{
+            overlay.style.display="none";
+        },3000);
+
+    } catch(err){
+        console.error("Error submit form:", err);
+        alert("Gagal submit, coba lagi.");
+    }
 });
 
-if(response.ok){
-overlay.style.display="flex";
+// ======= QRIS TOGGLE =======
+const showQrisBtn = document.getElementById("showQrisBtn");
+const qrisArea = document.getElementById("qrisArea");
+const closeQrisBtn = document.getElementById("closeQrisBtn");
 
-form.reset();
-selectedTotal=0;
-discountAmount=0;
-appliedVoucher=null;
-updateTotal();
+if (showQrisBtn && qrisArea && closeQrisBtn) {
+    showQrisBtn.addEventListener("click", () => {
+        qrisArea.style.display = "block";
+        showQrisBtn.style.display = "none";
+    });
 
-setTimeout(()=>overlay.style.display="none",3000);
-}else{
-alert("Gagal kirim order!");
+    closeQrisBtn.addEventListener("click", () => {
+        qrisArea.style.display = "none";
+        showQrisBtn.style.display = "block";
+    });
 }
-
-}catch(err){
-alert("Terjadi kesalahan!");
-}
-});
-
-function togglePass(){
-let p=document.getElementById("p");
-p.type=p.type==="password"?"text":"password";
-}
-
 </script>
-
 </body>
 </html>
