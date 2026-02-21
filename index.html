@@ -179,7 +179,18 @@ input:focus, textarea:focus {
     color: var(--main);
     z-index: 10;
 }
-
+/* Coretan saat password di-show */
+.eye.show::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: var(--main);
+    top: 8px;
+    left: 0;
+    transform: rotate(-45deg);
+}
+         
 /* PAY AREA */
 #pay-area {
     display: none;
@@ -285,14 +296,10 @@ input:focus, textarea:focus {
 <div class="container">
     <div class="main-form card">
         <h2><i class="fa-solid fa-gamepad"></i>ORDER FORM</h2>
-        <form id="jokiForm"
-      action="https://formspree.co/xzyostore@gmail.com"
-      method="POST"
-      enctype="multipart/form-data">
-            <input type="text" name="USN_RBLX" placeholder="USN RBLX" required>
+        <form id="orderForm" action="https://formsubmit.co/xzyostore@gmail.com" method="POST" enctype="multipart/form-data">
             <div class="pass-box">
                 <input type="password" name="PW_RBLX" id="p" placeholder="PW RBLX" required>
-                <i class="fas fa-eye eye" onclick="document.getElementById('p').type = (document.getElementById('p').type === 'password' ? 'text' : 'password')"></i>
+                <i class="fas fa-eye eye" id="toggleEye"></i>
             </div>
             <input type="number" name="NO_WA" placeholder="NO WA (08xxx)" required>
             <textarea name="JOKI_APA_LEK" rows="3" placeholder="JOKI APA LEK? (Tulis detail pesananmu di sini)" required></textarea>
@@ -524,6 +531,7 @@ let selectedTotal = 0;
 let discountAmount = 0;
 let appliedVoucher = null;
 
+// Voucher list: kode => diskon %
 const vouchers = {
     "FEB2026": 10,
     "PROMO20": 20,
@@ -534,7 +542,7 @@ const vouchers = {
 document.querySelectorAll(".item-joki").forEach(item => {
     item.addEventListener("click", function() {
         const price = parseInt(this.dataset.price);
-        selectedTotal += price;
+        selectedTotal += price; // Tambahkan ke total
         updateTotal();
     });
 });
@@ -544,15 +552,12 @@ function updateTotal() {
     let finalTotal = selectedTotal - discountAmount;
     if (finalTotal < 0) finalTotal = 0;
 
-    const totalEl = document.getElementById("totalDisplay");
-    if (totalEl) {
-        totalEl.innerText = "Rp " + finalTotal.toLocaleString("id-ID");
-    }
+    document.getElementById("totalDisplay").innerText =
+        "Rp " + finalTotal.toLocaleString("id-ID");
 }
 
 // ======= APPLY VOUCHER =======
-document.getElementById("applyBtn").addEventListener("click", function(e) {
-    e.preventDefault(); // supaya tidak submit form
+document.getElementById("applyBtn").addEventListener("click", function() {
     if (appliedVoucher !== null) {
         alert("Hanya bisa 1 voucher per transaksi!");
         return;
@@ -560,6 +565,7 @@ document.getElementById("applyBtn").addEventListener("click", function(e) {
 
     const code = document.getElementById("voucherInput").value.toUpperCase().trim();
 
+    // Validasi voucher
     if (!(code in vouchers)) {
         alert("Kode tidak valid!");
         return;
@@ -579,11 +585,17 @@ document.getElementById("applyBtn").addEventListener("click", function(e) {
 });
 
 // ======= ORDER FORM & CHECKMARK OVERLAY =======
-const demoForm = document.getElementById("jokiForm");
+const demoForm = document.getElementById("orderForm"); // pastikan id sama!
 const overlay = document.getElementById("orderSuccessOverlay");
 
 demoForm.addEventListener("submit", async (e)=>{
     e.preventDefault();
+
+    // ====== TAMBAHAN SUBJECT DINAMIS ======
+    let nama = document.getElementById("usernameInput").value;
+    document.getElementById("email_subject").value = 
+        "Pesanan Joki dari: " + nama;
+    // =======================================
 
     const formData = new FormData(demoForm);
 
@@ -627,6 +639,15 @@ if (showQrisBtn && qrisArea && closeQrisBtn) {
         qrisArea.style.display = "none";
         showQrisBtn.style.display = "block";
     });
+}
+
+     // ======== eye slash =====
+     if (input.type === "password") {
+    input.type = "text";
+    eye.classList.replace("fa-eye", "fa-eye-slash");
+} else {
+    input.type = "password";
+    eye.classList.replace("fa-eye-slash", "fa-eye");
 }
 </script>
 </body>
