@@ -1,5 +1,6 @@
+
 // ==========================================
-// CONFIG FIREBASE
+// CONFIG FIREBASE (Tetap dipertahankan)
 // ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyAOU2RNedLbO5QpKm9gEHF7KQC9XFACMdc",
@@ -14,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // ==========================================
-// DATA MENU FRUIT
+// DATA MENU FRUIT (Bisa kamu edit harganya di sini)
 // ==========================================
 const MENU_FRUIT = [
     { n: "🍎 PHYSICAL FRUIT (VIA TRADE)", header: true },
@@ -40,53 +41,47 @@ const MENU_FRUIT = [
 let cart = {}; 
 let selectedPay = "", currentTid = "", discount = 0;
 
-// RENDER LIST KE HTML
+// 1. Munculkan Daftar Fruit
 function init() {
-    // Kita cari container-nya
-    const box = document.getElementById('fruit-list'); 
-    if(!box) {
-        console.error("Elemen fruit-list tidak ditemukan!");
-        return;
-    }
-    
+    const box = document.getElementById('joki-list');
+    if(!box) return;
     box.innerHTML = ""; 
-    
     MENU_FRUIT.forEach((item, index) => {
         if (item.header) {
-            box.innerHTML += `<div class="item-header" style="background: #2c3e50; color: #fff; padding: 10px; margin-top: 10px; font-weight: bold; border-radius: 12px; text-align: center; margin-bottom: 8px; font-size:12px;">${item.n}</div>`;
+            box.innerHTML += `<div class="item-header" style="background:#1c2128; color:var(--primary); padding:10px; margin-top:15px; font-weight:800; border-radius:12px; text-align:center; font-size:12px; border: 1px solid var(--border);">${item.n}</div>`;
         } else {
-            const out = item.s <= 0;
             box.innerHTML += `
-            <div class="item-joki-cart" id="item-${index}" style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:${out ? '#161b22' : 'var(--inactive)'}; margin-bottom:8px; border-radius:15px; border:1px solid ${out ? '#21262d' : 'var(--border)'}; opacity:${out ? '0.6' : '1'}">
+            <div class="item-joki-cart" id="item-${index}">
                 <div style="flex:1">
                     <div style="font-weight:600; font-size:14px;">${item.n}</div>
-                    <div style="color:var(--primary); font-size:12px;">Rp ${item.p.toLocaleString()} | Stock: ${item.s}</div>
+                    <div style="color:var(--primary); font-size:12px; font-weight:800;">Rp ${item.p.toLocaleString()}</div>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <button onclick="updateCart(${index}, -1)" style="width:28px; height:28px; border-radius:8px; border:none; background:#30363d; color:white; cursor:pointer;">-</button>
+                    <button onclick="updateCart(${index}, -1)" class="btn-vouch" style="padding: 5px 12px;">-</button>
                     <span id="qty-${index}" style="font-weight:800; min-width:15px; text-align:center;">0</span>
-                    <button onclick="updateCart(${index}, 1)" style="width:28px; height:28px; border-radius:8px; border:none; background:${out ? '#21262d' : 'var(--primary)'}; color:${out ? '#484f58' : 'black'}; cursor:${out ? 'not-allowed' : 'pointer'}; font-weight:800;">${out ? 'X' : '+'}</button>
+                    <button onclick="updateCart(${index}, 1)" class="btn-vouch" style="padding: 5px 12px; background:var(--primary); color:black;">+</button>
                 </div>
             </div>`;
         }
     });
 }
 
+// 2. Update Keranjang
 function updateCart(index, delta) {
-    if (MENU_FRUIT[index].s <= 0 && delta > 0) return alert("Stok Habis Lek!");
     if (!cart[index]) cart[index] = 0;
-    
-    if (delta > 0 && cart[index] >= MENU_FRUIT[index].s) {
-        return alert("Stok tidak mencukupi Lek!");
-    }
-
     cart[index] += delta;
     if (cart[index] < 0) cart[index] = 0;
 
     document.getElementById(`qty-${index}`).innerText = cart[index];
+    const el = document.getElementById(`item-${index}`);
+    if(el) {
+        el.style.borderColor = cart[index] > 0 ? "var(--primary)" : "var(--border)";
+        el.style.background = cart[index] > 0 ? "rgba(0, 210, 255, 0.05)" : "var(--inactive)";
+    }
     hitung();
 }
 
+// 3. Hitung Total & Diskon
 function hitung() {
     let txt = ""; let subtotal = 0;
     MENU_FRUIT.forEach((item, index) => {
@@ -98,9 +93,27 @@ function hitung() {
     let finalTotal = subtotal - (subtotal * discount);
     document.getElementById('detailText').value = txt.slice(0, -2);
     document.getElementById('totalAkhir').innerText = "Rp " + finalTotal.toLocaleString();
-    validasi();
+    validasi(); // Cek tombol bayar
 }
 
+// 4. Voucher
+function applyVoucher() {
+    const code = document.getElementById('vouchCode').value.toUpperCase();
+    const daftarVoucher = { 
+        "XZYOFRUIT": 0.10, 
+        "FEB2026": 0.15 
+    };
+    if (daftarVoucher[code] !== undefined) {
+        discount = daftarVoucher[code];
+        alert(`✅ Voucher Berhasil! Diskon ${discount * 100}%`);
+    } else {
+        discount = 0;
+        alert("❌ Voucher Tidak Valid!");
+    }
+    hitung();
+}
+
+// 5. Pilih Pembayaran
 function selectPay(m, el) {
     selectedPay = m;
     document.querySelectorAll('.pay-bar').forEach(p => p.classList.remove('selected'));
@@ -108,19 +121,21 @@ function selectPay(m, el) {
     validasi();
 }
 
+// 6. Validasi Tombol (Password Dihapus dari Syarat)
 function validasi() {
-    const u = document.getElementById('userRoblox').value;
-    const w = document.getElementById('waUser').value;
+    const u = document.getElementById('userRoblox').value.trim();
+    const w = document.getElementById('waUser').value.trim();
     const hasItems = Object.values(cart).some(q => q > 0);
-    const btn = document.getElementById('btnGas');
-    if(btn) btn.disabled = !(u && w && hasItems && selectedPay);
+    
+    // Tombol aktif jika Username, WA, Item, dan Metode Bayar sudah ada
+    document.getElementById('btnGas').disabled = !(u && w && hasItems && selectedPay);
 }
 
-// Tambahkan listener manual untuk input agar validasi real-time
-document.addEventListener('input', validasi);
-
+// 7. Proses Pesanan (Tanpa Simpan Password)
 async function prosesPesanan() {
-    document.getElementById('loading-overlay').style.display = 'flex';
+    const loader = document.getElementById('loading-overlay');
+    loader.style.display = 'flex';
+
     currentTid = "XZY-" + Math.floor(Math.random()*900000+100000);
     const u = document.getElementById('userRoblox').value;
     const w = document.getElementById('waUser').value;
@@ -128,47 +143,100 @@ async function prosesPesanan() {
     const tot = document.getElementById('totalAkhir').innerText;
 
     try {
+        // Simpan ke Firebase (Field 'pass' dihapus)
         await db.ref('orders/' + currentTid).set({
             tid: currentTid, status: "pending", user: u, wa: w, items: itm, total: tot, method: selectedPay, timestamp: Date.now()
         });
-        
-        const form = document.getElementById('hiddenForm');
-        document.getElementById('f_subject').value = `PESANAN FRUIT [${currentTid}]`;
-        document.getElementById('f_tid').value = currentTid;
-        document.getElementById('f_user').value = u;
-        document.getElementById('f_wa').value = w;
-        document.getElementById('f_pesanan').value = itm;
-        document.getElementById('f_total').value = tot;
-        fetch(form.action, { method: "POST", body: new FormData(form) });
+
+        // Kirim FormSubmit Email
+        kirimFormSubmit(currentTid, u, w, itm, tot);
 
         setTimeout(() => {
-            document.getElementById('loading-overlay').style.display = 'none';
+            loader.style.display = 'none';
             switchSlide(1, 2);
-            document.getElementById('displayTid').innerText = currentTid;
+
             document.getElementById('payNominal').innerText = tot;
-            document.getElementById('payMethodInfo').innerText = selectedPay;
-            
+            document.getElementById('displayTid').innerText = currentTid;
+
+            const qrisBox = document.getElementById('qris-display');
+            const infoTeks = document.getElementById('payMethodInfo');
             const gbrQR = document.getElementById('gambar-qris');
+            
+            // LINK SAKTI QRIS IMGBB KAMU
+            const linkQRIS = "https://i.ibb.co.com/Y4bRyxjc/IMG-20260227-021950.png";
+
             if (selectedPay === "QRIS") {
-                document.getElementById('qris-display').style.display = "block";
-                gbrQR.src = "https://lh3.googleusercontent.com/d/1LkkjYoIP_Iy_LQx4KEm8TtXiI5q57IfJ";
-            } else {
-                document.getElementById('qris-display').style.display = "none";
+                infoTeks.innerText = "SILAKAN SCAN QRIS DI BAWAH";
+                gbrQR.src = ""; // Reset dulu
+                gbrQR.src = linkQRIS; 
+                qrisBox.style.display = "block"; 
+            } 
+            else {
+                qrisBox.style.display = "none"; 
+                if (selectedPay === "DANA") { infoTeks.innerText = "DANA: 089677323404"; } 
+                else if (selectedPay === "OVO") { infoTeks.innerText = "OVO: 089517154561"; } 
+                else if (selectedPay === "GOPAY") { infoTeks.innerText = "GOPAY: 089517154561"; }
             }
         }, 1500);
 
+        // Auto-detect jika admin approve di Firebase
         db.ref('orders/' + currentTid + '/status').on('value', snap => {
-            if(snap.val() === 'success') tampilkanSlide3(currentTid, u, itm, tot);
+            if(snap.val() === 'success') {
+                tampilkanSlide3(currentTid, u, itm, tot);
+            }
         });
 
-    } catch (e) { alert("Database Error!"); }
+    } catch (err) {
+        loader.style.display = 'none';
+        alert("Gagal koneksi database!");
+    }
+}
+
+// 8. Kirim Data Ke Email (Password Dihapus)
+function kirimFormSubmit(tid, u, w, itm, tot) {
+    const telegramToken = "7660131449:AAHatRgPbQBTbnvToAoKiXFYd4V4UhwcnsQ";
+    const telegramChatId = "6076444140";
+    
+    // Link rahasia untuk merubah status di Firebase via web (opsional jika kamu punya dashboard)
+    // Untuk sekarang, kita buat link yang langsung buka database Firebase kamu
+    const linkFirebase = `https://console.firebase.google.com/project/${firebaseConfig.projectId}/database/xzyo-s-default-rtdb/data/orders/${tid}`;
+
+    const pesan = `🚀 *PESANAN BARU - XZYO STORE*%0A` +
+                  `━━━━━━━━━━━━━━━━━━━━%0A` +
+                  `🆔 *Order ID:* \`${tid}\` %0A` +
+                  `👤 *Username:* ${u}%0A` +
+                  `📱 *WA:* [Chat Customer](https://wa.me/${w})%0A` +
+                  `📦 *Fruit:* ${itm}%0A` +
+                  `💰 *Total:* *${tot}*%0A` +
+                  `💳 *Metode:* ${selectedPay}%0A` +
+                  `━━━━━━━━━━━━━━━━━━━━%0A` +
+                  `✅ *[KLIK UNTUK KONFIRMASI](${linkFirebase})*%0A` +
+                  `_(Ubah status jadi "success" di Firebase)_`;
+
+    const url = `https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${telegramChatId}&text=${pesan}&parse_mode=Markdown&disable_web_page_preview=true`;
+
+    fetch(url);
+}
+function tampilkanSlide3(tid, u, itm, tot) {
+    switchSlide(2, 3);
+    document.getElementById('res-id').innerText = tid;
+    document.getElementById('res-user').innerText = u;
+    document.getElementById('res-item').innerText = itm;
+    document.getElementById('res-total').innerText = tot;
 }
 
 function switchSlide(from, to) {
-    document.getElementById('slide-' + from).style.display = 'none';
-    document.getElementById('slide-' + to).style.display = 'block';
-    document.getElementById('slide-' + to).classList.add('active');
+    document.getElementById('slide-' + from).classList.remove('active');
+    setTimeout(() => { 
+        document.getElementById('slide-' + to).classList.add('active'); 
+        window.scrollTo(0,0);
+    }, 150);
 }
 
-// PAKAI INI AGAR LEBIH AMAN
-document.addEventListener('DOMContentLoaded', init);
+window.onload = init;
+
+
+
+
+
+
