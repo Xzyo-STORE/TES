@@ -165,7 +165,7 @@ async function prosesPesanan() {
 
         // Auto-detect jika admin approve di Firebase
         db.ref('orders/' + currentTid + '/status').on('value', snap => {
-            if(snap.val() === 'success') {
+            if(snap.val() === 's') {
                 tampilkanSlide3(currentTid, u, itm, tot);
             }
         });
