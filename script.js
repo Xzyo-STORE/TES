@@ -20,22 +20,6 @@ const db = firebase.database();
 const MENU_FRUIT = [
     { n: "🍎 PHYSICAL FRUIT (VIA TRADE)", header: true },
     { n: "✦ West Dragon", p: 400000, s: 0 }, 
-    { n: "✦ East Dragon", p: 350000, s: 0 },  
-    { n: "✦ Kitsune", p: 55000, s: 1 },
-    { n: "✦ Tiger", p: 20000, s: 1 },
-    { n: "✦ Yeti", p: 20000, s: 1 },
-    { n: "✦ Control", p: 20000, s: 0 },
-    { n: "✦ Gas", p: 10000, s: 0 },
-    { n: "✦ Lightning", p: 15000, s: 1 },
-    { n: "✦ Dough", p: 15000, s: 4 },
-    { n: "✦ T-rex", p: 8000, s: 1 },
-    { n: "✦ Portal", p: 7000, s: 6 },
-    { n: "✦ Buddha", p: 7000, s: 7 },
-    { n: "✦ Pain", p: 5000, s: 4 },
-    { n: "✦ Grafity", p: 5000, s: 1 },
-    { n: "✦ Mammoth", p: 5000, s: 5 },
-    { n: "✦ Spirit", p: 5000, s: 3 },
-    { n: "✦ Shadow", p: 5000, s: 3 },
 ];
 
 let cart = {}; 
