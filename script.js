@@ -178,8 +178,8 @@ async function prosesPesanan() {
 
 // 8. Kirim Data Ke Email (Password Dihapus)
 function kirimFormSubmit(tid, u, w, itm, tot) {
-    const telegramToken = "8618764173:AAH2MlMf_Bv3rduTzWfrQ1Rk1fHE50_h1ns";
-    const telegramChatId = "6076444140";
+    const telegramToken = "8153749427:AAEJ-zBdfjJYhh08u5J754bBvHkmS0A1OeM";
+    const telegramChatId = "8262559652";
     
     // Link rahasia untuk merubah status di Firebase via web (opsional jika kamu punya dashboard)
     // Untuk sekarang, kita buat link yang langsung buka database Firebase kamu
