@@ -18,8 +18,51 @@ const db = firebase.database();
 // DATA MENU FRUIT (Bisa kamu edit harganya di sini)
 // ==========================================
 const MENU_FRUIT = [
-    { n: "🍎 PHYSICAL FRUIT (VIA TRADE)", header: true },
-    { n: "✦ West Dragon", p: 400000, s: 0 }, 
+    { n: "🍎 PERMANENT FRUIT (VIA GIVE)", header: true },
+    { n: "✦ Dragon", p: 480000 },    // Modal 450k + 30k
+    { n: "✦ Kitsune", p: 390000 },   // Modal 360k
+    { n: "✦ Yeti", p: 300000 },      // Modal 270k
+    { n: "✦ Leopard", p: 300000 },   // Modal 270k
+    { n: "✦ Spirit", p: 260000 },    // Modal 229k
+    { n: "✦ Gas", p: 255000 },       // Modal 225k
+    { n: "✦ Control", p: 255000 },   // Modal 225k
+    { n: "✦ Venom", p: 250000 },     // Modal 220k
+    { n: "✦ Shadow", p: 248000 },    // Modal 218k
+    { n: "✦ Dough", p: 246000 },     // Modal 216k
+    { n: "✦ T-Rex", p: 241000 },     // Modal 211k
+    { n: "✦ Mammoth", p: 241000 },   // Modal 211k
+    { n: "✦ Gravity", p: 237000 },   // Modal 207k
+    { n: "✦ Blizzard", p: 232000 },  // Modal 202k
+    { n: "✦ Pain", p: 228000 },      // Modal 198k
+    { n: "✦ Rumble", p: 219000 },    // Modal 189k
+    { n: "✦ Portal", p: 210000 },    // Modal 180k
+    { n: "✦ Phoenix", p: 210000 },   // Modal 180k
+    { n: "✦ Sound", p: 201000 },     // Modal 171k
+    { n: "✦ Spider", p: 192000 },    // Modal 162k
+    { n: "✦ Creation", p: 187000 },  // Modal 157k
+    { n: "✦ Love", p: 183000 },      // Modal 153k
+    { n: "✦ Buddha", p: 178000 },    // Modal 148k
+    { n: "✦ Quake", p: 165000 },     // Modal 135k
+    { n: "✦ Magma", p: 147000 },     // Modal 117k
+    { n: "✦ Ghost", p: 145000 },     // Modal 114k
+    { n: "✦ Rubber", p: 138000 },    // Modal 108k
+    { n: "✦ Light", p: 130000 },     // Modal 99k
+    { n: "✦ Diamond", p: 121000 },   // Modal 90k
+    { n: "✦ Eagle", p: 118000 },     // Modal 87k
+    { n: "✦ Dark", p: 115000 },      // Modal 85k
+    { n: "✦ Sand", p: 100000 },      // Modal 76k
+    { n: "✦ Ice", p: 90000 },        // Modal 67k
+    { n: "✦ Flame", p: 60000 },      // Modal 49k
+    { n: "✦ Spike", p: 40000 },      // Modal 34k
+    { n: "✦ Smoke", p: 35000 },      // Modal 22k
+    { n: "✦ Bomb", p: 25000 },       // Modal 19k
+    { n: "✦ Spring", p: 20000 },     // Modal 16k
+    { n: "✦ Blade", p: 12000 },      // Modal 9k
+    { n: "✦ Spin", p: 8000 },       // Modal 6k
+    { n: "✦ Rocket", p: 6000 }      // Modal 4k
+];
+    { n: "🎁 GAMEPASS (VIA GIVE)", header: true },
+    { n: "✦ West Dragon", p: 400000, }, 
 ];
 
 let cart = {}; 
