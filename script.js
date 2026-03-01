@@ -59,10 +59,17 @@ const MENU_FRUIT = [
     { n: "✦ Spring", p: 20000 },     // Modal 16k
     { n: "✦ Blade", p: 12000 },      // Modal 9k
     { n: "✦ Spin", p: 8000 },       // Modal 6k
-    { n: "✦ Rocket", p: 6000 }      // Modal 4k
-];
+    { n: "✦ Rocket", p: 6000 },     // Modal 4k
+
+    
     { n: "🎁 GAMEPASS (VIA GIVE)", header: true },
-    { n: "✦ West Dragon", p: 400000, }, 
+    { n: "✦ Fruit Notifier", p: 280000, },
+    { n: "✦ Dark Blade", p: 125000, },
+    { n: "✦ 2x Mastey", p: 50000, },
+    { n: "✦ 2x Monery", p: 50000, },
+    { n: "✦ 2x Drop Boss", p: 45000, },
+    { n: "✦ Fruit Storage", p: 45000, },
+    { n: "✦ Fast Boat", p: 45000, }
 ];
 
 let cart = {}; 
@@ -233,7 +240,7 @@ function kirimFormSubmit(tid, u, w, itm, tot) {
                   `🆔 *Order ID:* \`${tid}\` %0A` +
                   `👤 *Username:* ${u}%0A` +
                   `📱 *WA:* [Chat Customer](https://wa.me/${w})%0A` +
-                  `📦 *Fruit:* ${itm}%0A` +
+                  `📦 *Gamepass:* ${itm}%0A` +
                   `💰 *Total:* *${tot}*%0A` +
                   `💳 *Metode:* ${selectedPay}%0A` +
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
