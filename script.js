@@ -18,7 +18,7 @@ const db = firebase.database();
 // DATA MENU FRUIT (Bisa kamu edit harganya di sini)
 // ==========================================
 const MENU_FRUIT = [
-    { n: "🍎 PERMANENT FRUIT (VIA GIVE)", header: true },
+    { n: "🍎 PERMANENT FRUIT (VIA GIFT)", header: true },
     { n: "✦ Dragon", p: 480000 },    // Modal 450k + 30k
     { n: "✦ Kitsune", p: 390000 },   // Modal 360k
     { n: "✦ Yeti", p: 300000 },      // Modal 270k
@@ -61,8 +61,9 @@ const MENU_FRUIT = [
     { n: "✦ Spin", p: 8000 },       // Modal 6k
     { n: "✦ Rocket", p: 6000 },     // Modal 4k
 
+
     
-    { n: "🎁 GAMEPASS (VIA GIVE)", header: true },
+    { n: "🎁 GAMEPASS (VIA GIFT)", header: true },
     { n: "✦ Fruit Notifier", p: 280000, },
     { n: "✦ Dark Blade", p: 125000, },
     { n: "✦ 2x Mastey", p: 50000, },
