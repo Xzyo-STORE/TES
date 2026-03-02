@@ -188,7 +188,7 @@ async function prosesPesanan() {
 
     try {
         // Simpan ke Firebase (Pakai variabel 'w' yang sudah rapi 62)
-        await db.ref('orders/' + currentTid).set({
+        await db.ref('gamepass/' + currentTid).set({
             tid: currentTid, 
             status: "pending", 
             user: u, 
