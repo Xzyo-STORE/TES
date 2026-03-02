@@ -16,28 +16,61 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // ==========================================
-// DATA MENU FRUIT & GAMEPASS
+// DATA MENU FRUIT & GAMEPASS (FULL 100%)
 // ==========================================
 const MENU_FRUIT = [
     { n: "🍎 PERMANENT FRUIT (VIA GIFT)", header: true },
     { n: "✦ Dragon", p: 480000 },
     { n: "✦ Kitsune", p: 390000 },
+    { n: "✦ Yeti", p: 300000 },
     { n: "✦ Leopard", p: 300000 },
+    { n: "✦ Spirit", p: 260000 },
+    { n: "✦ Gas", p: 255000 },
+    { n: "✦ Control", p: 255000 },
+    { n: "✦ Venom", p: 250000 },
+    { n: "✦ Shadow", p: 248000 },
     { n: "✦ Dough", p: 246000 },
+    { n: "✦ T-Rex", p: 241000 },
+    { n: "✦ Mammoth", p: 241000 },
+    { n: "✦ Gravity", p: 237000 },
+    { n: "✦ Blizzard", p: 232000 },
+    { n: "✦ Pain", p: 228000 },
+    { n: "✦ Rumble", p: 219000 },
+    { n: "✦ Portal", p: 210000 },
+    { n: "✦ Phoenix", p: 210000 },
+    { n: "✦ Sound", p: 201000 },
+    { n: "✦ Spider", p: 192000 },
+    { n: "✦ Creation", p: 187000 },
+    { n: "✦ Love", p: 183000 },
     { n: "✦ Buddha", p: 178000 },
+    { n: "✦ Quake", p: 165000 },
     { n: "✦ Magma", p: 147000 },
+    { n: "✦ Ghost", p: 145000 },
+    { n: "✦ Rubber", p: 138000 },
     { n: "✦ Light", p: 130000 },
+    { n: "✦ Diamond", p: 121000 },
+    { n: "✦ Eagle", p: 118000 },
+    { n: "✦ Dark", p: 115000 },
+    { n: "✦ Sand", p: 100000 },
     { n: "✦ Ice", p: 90000 },
+    { n: "✦ Flame", p: 60000 },
+    { n: "✦ Spike", p: 40000 },
+    { n: "✦ Smoke", p: 35000 },
+    { n: "✦ Bomb", p: 25000 },
+    { n: "✦ Spring", p: 20000 },
+    { n: "✦ Blade", p: 12000 },
+    { n: "✦ Spin", p: 8000 },
+    { n: "✦ Rocket", p: 6000 },
     
     { n: "🎁 GAMEPASS (VIA GIFT)", header: true },
     { n: "✦ Fruit Notifier", p: 280000 },
     { n: "✦ Dark Blade", p: 125000 },
     { n: "✦ 2x Mastery", p: 50000 },
     { n: "✦ 2x Money", p: 50000 },
+    { n: "✦ 2x Drop Boss", p: 45000 },
     { n: "✦ Fruit Storage", p: 45000 },
     { n: "✦ Fast Boat", p: 45000 }
 ];
-
 let cart = {}; 
 let selectedPay = "", currentTid = "", discount = 0;
 
