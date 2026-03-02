@@ -173,17 +173,33 @@ async function prosesPesanan() {
 
     currentTid = "XZY-" + Math.floor(Math.random()*900000+100000);
     const u = document.getElementById('userRoblox').value;
-    const w = document.getElementById('waUser').value;
+    
+    // --- LOGIKA AUTO UBAH 0 KE 62 ---
+    let w = document.getElementById('waUser').value.trim();
+    if (w.startsWith('0')) {
+        w = '62' + w.substring(1);
+    } else if (!w.startsWith('62') && w !== "") {
+        w = '62' + w;
+    }
+    // --------------------------------
+
     const itm = document.getElementById('detailText').value;
     const tot = document.getElementById('totalAkhir').innerText;
 
     try {
-        // Simpan ke Firebase (Field 'pass' dihapus)
+        // Simpan ke Firebase (Pakai variabel 'w' yang sudah rapi 62)
         await db.ref('orders/' + currentTid).set({
-            tid: currentTid, status: "pending", user: u, wa: w, items: itm, total: tot, method: selectedPay, timestamp: Date.now()
+            tid: currentTid, 
+            status: "pending", 
+            user: u, 
+            wa: w, 
+            items: itm, 
+            total: tot, 
+            method: selectedPay, 
+            timestamp: Date.now()
         });
 
-        // Kirim FormSubmit Email
+        // Kirim ke Telegram Admin (Pakai variabel 'w' yang sudah rapi 62)
         kirimFormSubmit(currentTid, u, w, itm, tot);
 
         setTimeout(() => {
@@ -208,11 +224,24 @@ async function prosesPesanan() {
             } 
             else {
                 qrisBox.style.display = "none"; 
-                if (selectedPay === "DANA") { infoTeks.innerText = "DANA: 089677323404"; } 
+                if (selectedPay === "DANA") { infoTeks.innerText = "DANA: 089677329404"; } 
                 else if (selectedPay === "OVO") { infoTeks.innerText = "OVO: 089517154561"; } 
                 else if (selectedPay === "GOPAY") { infoTeks.innerText = "GOPAY: 089517154561"; }
             }
         }, 1500);
+
+        // Pantau status (on value) tetap jalan di sini jika kamu pakai fungsi otomatis slide 3
+        db.ref('orders/' + currentTid + '/status').on('value', snap => {
+            if(snap.val() === 's') {
+                tampilkanSlide3(currentTid, u, itm, tot);
+            }
+        });
+
+    } catch (err) {
+        loader.style.display = 'none';
+        alert("Gagal koneksi database!");
+    }
+}
 
         // Auto-detect jika admin approve di Firebase
         db.ref('orders/' + currentTid + '/status').on('value', snap => {
