@@ -1,6 +1,5 @@
-
 // ==========================================
-// CONFIG FIREBASE (Tetap dipertahankan)
+// CONFIG FIREBASE
 // ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyAOU2RNedLbO5QpKm9gEHF7KQC9XFACMdc",
@@ -15,62 +14,60 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // ==========================================
-// DATA MENU FRUIT (Bisa kamu edit harganya di sini)
+// DATA MENU FRUIT & GAMEPASS
 // ==========================================
 const MENU_FRUIT = [
     { n: "🍎 PERMANENT FRUIT (VIA GIFT)", header: true },
-    { n: "✦ Dragon", p: 480000 },    // Modal 450k + 30k
-    { n: "✦ Kitsune", p: 390000 },   // Modal 360k
-    { n: "✦ Yeti", p: 300000 },      // Modal 270k
-    { n: "✦ Leopard", p: 300000 },   // Modal 270k
-    { n: "✦ Spirit", p: 260000 },    // Modal 229k
-    { n: "✦ Gas", p: 255000 },       // Modal 225k
-    { n: "✦ Control", p: 255000 },   // Modal 225k
-    { n: "✦ Venom", p: 250000 },     // Modal 220k
-    { n: "✦ Shadow", p: 248000 },    // Modal 218k
-    { n: "✦ Dough", p: 246000 },     // Modal 216k
-    { n: "✦ T-Rex", p: 241000 },     // Modal 211k
-    { n: "✦ Mammoth", p: 241000 },   // Modal 211k
-    { n: "✦ Gravity", p: 237000 },   // Modal 207k
-    { n: "✦ Blizzard", p: 232000 },  // Modal 202k
-    { n: "✦ Pain", p: 228000 },      // Modal 198k
-    { n: "✦ Rumble", p: 219000 },    // Modal 189k
-    { n: "✦ Portal", p: 210000 },    // Modal 180k
-    { n: "✦ Phoenix", p: 210000 },   // Modal 180k
-    { n: "✦ Sound", p: 201000 },     // Modal 171k
-    { n: "✦ Spider", p: 192000 },    // Modal 162k
-    { n: "✦ Creation", p: 187000 },  // Modal 157k
-    { n: "✦ Love", p: 183000 },      // Modal 153k
-    { n: "✦ Buddha", p: 178000 },    // Modal 148k
-    { n: "✦ Quake", p: 165000 },     // Modal 135k
-    { n: "✦ Magma", p: 147000 },     // Modal 117k
-    { n: "✦ Ghost", p: 145000 },     // Modal 114k
-    { n: "✦ Rubber", p: 138000 },    // Modal 108k
-    { n: "✦ Light", p: 130000 },     // Modal 99k
-    { n: "✦ Diamond", p: 121000 },   // Modal 90k
-    { n: "✦ Eagle", p: 118000 },     // Modal 87k
-    { n: "✦ Dark", p: 115000 },      // Modal 85k
-    { n: "✦ Sand", p: 100000 },      // Modal 76k
-    { n: "✦ Ice", p: 90000 },        // Modal 67k
-    { n: "✦ Flame", p: 60000 },      // Modal 49k
-    { n: "✦ Spike", p: 40000 },      // Modal 34k
-    { n: "✦ Smoke", p: 35000 },      // Modal 22k
-    { n: "✦ Bomb", p: 25000 },       // Modal 19k
-    { n: "✦ Spring", p: 20000 },     // Modal 16k
-    { n: "✦ Blade", p: 12000 },      // Modal 9k
-    { n: "✦ Spin", p: 8000 },       // Modal 6k
-    { n: "✦ Rocket", p: 6000 },     // Modal 4k
+    { n: "✦ Dragon", p: 480000 },
+    { n: "✦ Kitsune", p: 390000 },
+    { n: "✦ Yeti", p: 300000 },
+    { n: "✦ Leopard", p: 300000 },
+    { n: "✦ Spirit", p: 260000 },
+    { n: "✦ Gas", p: 255000 },
+    { n: "✦ Control", p: 255000 },
+    { n: "✦ Venom", p: 250000 },
+    { n: "✦ Shadow", p: 248000 },
+    { n: "✦ Dough", p: 246000 },
+    { n: "✦ T-Rex", p: 241000 },
+    { n: "✦ Mammoth", p: 241000 },
+    { n: "✦ Gravity", p: 237000 },
+    { n: "✦ Blizzard", p: 232000 },
+    { n: "✦ Pain", p: 228000 },
+    { n: "✦ Rumble", p: 219000 },
+    { n: "✦ Portal", p: 210000 },
+    { n: "✦ Phoenix", p: 210000 },
+    { n: "✦ Sound", p: 201000 },
+    { n: "✦ Spider", p: 192000 },
+    { n: "✦ Creation", p: 187000 },
+    { n: "✦ Love", p: 183000 },
+    { n: "✦ Buddha", p: 178000 },
+    { n: "✦ Quake", p: 165000 },
+    { n: "✦ Magma", p: 147000 },
+    { n: "✦ Ghost", p: 145000 },
+    { n: "✦ Rubber", p: 138000 },
+    { n: "✦ Light", p: 130000 },
+    { n: "✦ Diamond", p: 121000 },
+    { n: "✦ Eagle", p: 118000 },
+    { n: "✦ Dark", p: 115000 },
+    { n: "✦ Sand", p: 100000 },
+    { n: "✦ Ice", p: 90000 },
+    { n: "✦ Flame", p: 60000 },
+    { n: "✦ Spike", p: 40000 },
+    { n: "✦ Smoke", p: 35000 },
+    { n: "✦ Bomb", p: 25000 },
+    { n: "✦ Spring", p: 20000 },
+    { n: "✦ Blade", p: 12000 },
+    { n: "✦ Spin", p: 8000 },
+    { n: "✦ Rocket", p: 6000 },
 
-
-    
     { n: "🎁 GAMEPASS (VIA GIFT)", header: true },
-    { n: "✦ Fruit Notifier", p: 280000, },
-    { n: "✦ Dark Blade", p: 125000, },
-    { n: "✦ 2x Mastey", p: 50000, },
-    { n: "✦ 2x Monery", p: 50000, },
-    { n: "✦ 2x Drop Boss", p: 45000, },
-    { n: "✦ Fruit Storage", p: 45000, },
-    { n: "✦ Fast Boat", p: 45000, }
+    { n: "✦ Fruit Notifier", p: 280000 },
+    { n: "✦ Dark Blade", p: 125000 },
+    { n: "✦ 2x Mastey", p: 50000 },
+    { n: "✦ 2x Monery", p: 50000 },
+    { n: "✦ 2x Drop Boss", p: 45000 },
+    { n: "✦ Fruit Storage", p: 45000 },
+    { n: "✦ Fast Boat", p: 45000 }
 ];
 
 let cart = {}; 
@@ -86,7 +83,7 @@ function init() {
             box.innerHTML += `<div class="item-header" style="background:#1c2128; color:var(--primary); padding:10px; margin-top:15px; font-weight:800; border-radius:12px; text-align:center; font-size:12px; border: 1px solid var(--border);">${item.n}</div>`;
         } else {
             box.innerHTML += `
-            <div class="item-joki-cart" id="item-${index}">
+            <div class="item-joki-cart" id="item-${index}" style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:var(--inactive); margin-bottom:8px; border-radius:15px; border:1px solid var(--border);">
                 <div style="flex:1">
                     <div style="font-weight:600; font-size:14px;">${item.n}</div>
                     <div style="color:var(--primary); font-size:12px; font-weight:800;">Rp ${item.p.toLocaleString()}</div>
@@ -128,16 +125,13 @@ function hitung() {
     let finalTotal = subtotal - (subtotal * discount);
     document.getElementById('detailText').value = txt.slice(0, -2);
     document.getElementById('totalAkhir').innerText = "Rp " + finalTotal.toLocaleString();
-    validasi(); // Cek tombol bayar
+    validasi();
 }
 
 // 4. Voucher
 function applyVoucher() {
     const code = document.getElementById('vouchCode').value.toUpperCase();
-    const daftarVoucher = { 
-        "XZYOFRUIT": 0.10, 
-        "FEB2026": 0.15 
-    };
+    const daftarVoucher = { "XZYOFRUIT": 0.10, "FEB2026": 0.15 };
     if (daftarVoucher[code] !== undefined) {
         discount = daftarVoucher[code];
         alert(`✅ Voucher Berhasil! Diskon ${discount * 100}%`);
@@ -156,23 +150,21 @@ function selectPay(m, el) {
     validasi();
 }
 
-// 6. Validasi Tombol (Password Dihapus dari Syarat)
+// 6. Validasi
 function validasi() {
     const u = document.getElementById('userRoblox').value.trim();
     const w = document.getElementById('waUser').value.trim();
     const hasItems = Object.values(cart).some(q => q > 0);
-    
-    // Tombol aktif jika Username, WA, Item, dan Metode Bayar sudah ada
     document.getElementById('btnGas').disabled = !(u && w && hasItems && selectedPay);
 }
 
-// 7. Proses Pesanan (Tanpa Simpan Password)
+// 7. Proses Pesanan
 async function prosesPesanan() {
     const loader = document.getElementById('loading-overlay');
     loader.style.display = 'flex';
 
     currentTid = "XZY-" + Math.floor(Math.random()*900000+100000);
-    const u = document.getElementById('userRoblox').value;
+    const u = document.getElementById('userRoblox').value.trim();
     
     // --- LOGIKA AUTO UBAH 0 KE 62 ---
     let w = document.getElementById('waUser').value.trim();
@@ -181,16 +173,15 @@ async function prosesPesanan() {
     } else if (!w.startsWith('62') && w !== "") {
         w = '62' + w;
     }
-    // --------------------------------
 
     const itm = document.getElementById('detailText').value;
     const tot = document.getElementById('totalAkhir').innerText;
 
     try {
-        // Simpan ke Firebase (Pakai variabel 'w' yang sudah rapi 62)
-        await db.ref('gamepass/' + currentTid).set({
+        await db.ref('orders/' + currentTid).set({
             tid: currentTid, 
             status: "pending", 
+            category: "FRUIT/GAMEPASS",
             user: u, 
             wa: w, 
             items: itm, 
@@ -199,38 +190,32 @@ async function prosesPesanan() {
             timestamp: Date.now()
         });
 
-        // Kirim ke Telegram Admin (Pakai variabel 'w' yang sudah rapi 62)
         kirimFormSubmit(currentTid, u, w, itm, tot);
 
         setTimeout(() => {
             loader.style.display = 'none';
             switchSlide(1, 2);
-
             document.getElementById('payNominal').innerText = tot;
             document.getElementById('displayTid').innerText = currentTid;
 
             const qrisBox = document.getElementById('qris-display');
             const infoTeks = document.getElementById('payMethodInfo');
             const gbrQR = document.getElementById('gambar-qris');
-            
-            // LINK SAKTI QRIS IMGBB KAMU
             const linkQRIS = "https://i.ibb.co.com/Y4bRyxjc/IMG-20260227-021950.png";
 
             if (selectedPay === "QRIS") {
                 infoTeks.innerText = "SILAKAN SCAN QRIS DI BAWAH";
-                gbrQR.src = ""; // Reset dulu
-                gbrQR.src = linkQRIS; 
+                if (gbrQR) gbrQR.src = linkQRIS;
                 qrisBox.style.display = "block"; 
-            } 
-            else {
+            } else {
                 qrisBox.style.display = "none"; 
-                if (selectedPay === "DANA") { infoTeks.innerText = "DANA: 089677329404"; } 
-                else if (selectedPay === "OVO") { infoTeks.innerText = "OVO: 089517154561"; } 
-                else if (selectedPay === "GOPAY") { infoTeks.innerText = "GOPAY: 089517154561"; }
+                if (selectedPay === "DANA") infoTeks.innerText = "DANA: 089677329404";
+                else if (selectedPay === "OVO") infoTeks.innerText = "OVO: 089517154561";
+                else if (selectedPay === "GOPAY") infoTeks.innerText = "GOPAY: 089517154561";
             }
         }, 1500);
 
-        // Pantau status (on value) tetap jalan di sini jika kamu pakai fungsi otomatis slide 3
+        // Pantau status
         db.ref('orders/' + currentTid + '/status').on('value', snap => {
             if(snap.val() === 's') {
                 tampilkanSlide3(currentTid, u, itm, tot);
@@ -243,44 +228,26 @@ async function prosesPesanan() {
     }
 }
 
-        // Auto-detect jika admin approve di Firebase
-        db.ref('orders/' + currentTid + '/status').on('value', snap => {
-            if(snap.val() === 's') {
-                tampilkanSlide3(currentTid, u, itm, tot);
-            }
-        });
-
-    } catch (err) {
-        loader.style.display = 'none';
-        alert("Gagal koneksi database!");
-    }
-}
-
-// 8. Kirim Data Ke Email (Password Dihapus)
+// 8. Kirim Telegram
 function kirimFormSubmit(tid, u, w, itm, tot) {
     const telegramToken = "8153749427:AAEJ-zBdfjJYhh08u5J754bBvHkmS0A1OeM";
     const telegramChatId = "8262559652";
-    
-    // Link rahasia untuk merubah status di Firebase via web (opsional jika kamu punya dashboard)
-    // Untuk sekarang, kita buat link yang langsung buka database Firebase kamu
     const linkFirebase = `https://console.firebase.google.com/project/${firebaseConfig.projectId}/database/xzyo-s-default-rtdb/data/orders/${tid}`;
 
-    const pesan = `🚀 *PESANAN BARU - XZYO STORE*%0A` +
+    const pesan = `🍎 *PESANAN FRUIT BARU*%0A` +
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
                   `🆔 *Order ID:* \`${tid}\` %0A` +
                   `👤 *Username:* ${u}%0A` +
                   `📱 *WA:* [Chat Customer](https://wa.me/${w})%0A` +
-                  `📦 *Gamepass:* ${itm}%0A` +
+                  `📦 *Items:* ${itm}%0A` +
                   `💰 *Total:* *${tot}*%0A` +
                   `💳 *Metode:* ${selectedPay}%0A` +
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
-                  `✅ *[KLIK UNTUK KONFIRMASI](${linkFirebase})*%0A` +
-                  `_(Ubah status jadi "success" di Firebase)_`;
+                  `✅ *[KONFIRMASI](${linkFirebase})*`;
 
-    const url = `https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${telegramChatId}&text=${pesan}&parse_mode=Markdown&disable_web_page_preview=true`;
-
-    fetch(url);
+    fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${telegramChatId}&text=${pesan}&parse_mode=Markdown&disable_web_page_preview=true`);
 }
+
 function tampilkanSlide3(tid, u, itm, tot) {
     switchSlide(2, 3);
     document.getElementById('res-id').innerText = tid;
@@ -298,9 +265,3 @@ function switchSlide(from, to) {
 }
 
 window.onload = init;
-
-
-
-
-
-
