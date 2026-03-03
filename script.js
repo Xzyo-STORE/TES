@@ -213,9 +213,9 @@ function kirimFormSubmit(tid, u, w, itm, tot) {
     const telegramToken = "8733004732:AAHB1f_BfXMOZt_EDWGNMNBDTSjcC5YzxMY";
     const telegramChatId = "8262559652";
     
-    const linkKonfirmasi = `https://xzyo-store.vercel.app/admin.html?tid=${tid}`;
+    const linkKonfirmasi = `https://xzyo-store.vercel.app/GAMEPAS---BLOX-FRUIT/admin.html?tid=${tid}`;
 
-    const pesan = `🚀 *PESANAN BARU - XZYO STORE*%0A` +
+    const pesan = `🚀 *PESANAN GAMEPASS BARU*%0A` +
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
                   `🆔 *Order ID:* \`${tid}\` %0A` +
                   `👤 *Username:* ${u}%0A` +
