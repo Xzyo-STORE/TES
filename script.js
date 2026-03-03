@@ -212,15 +212,19 @@ async function prosesPesanan() {
 function kirimFormSubmit(tid, u, w, itm, tot) {
     const telegramToken = "8733004732:AAHB1f_BfXMOZt_EDWGNMNBDTSjcC5YzxMY";
     const telegramChatId = "8262559652";
-    const pesan = `🚀 *PESANAN GAMEPASS BARU*%0A` +
+    const linkFirebase = `https://console.firebase.google.com/project/${firebaseConfig.projectId}/database/xzyo-s-default-rtdb/data/orders/${tid}`;
+
+    const pesan = `🚀 *PESANAN BARU - XZYO STORE*%0A` +
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
-                  `🆔 *ID:* \`${tid}\` %0A` +
-                  `👤 *User:* ${u}%0A` +
-                  `📱 *WA:* [Chat](https://wa.me/${w})%0A` +
-                  `📦 *Item:* ${itm}%0A` +
+                  `🆔 *Order ID:* \`${tid}\` %0A` +
+                  `👤 *Username:* ${u}%0A` +
+                  `📱 *WA:* [Chat Customer](https://wa.me/${w})%0A` +
+                  `📦 *Fruit:* ${itm}%0A` +
                   `💰 *Total:* *${tot}*%0A` +
-                  `💳 *Bayar:* ${selectedPay}%0A` +
-                  `━━━━━━━━━━━━━━━━━━━━%0A`;
+                  `💳 *Metode:* ${selectedPay}%0A` +
+                  `━━━━━━━━━━━━━━━━━━━━%0A` +
+                  `✅ *[KLIK UNTUK KONFIRMASI](${linkFirebase})*%0A` +
+                  `_(Ubah status jadi "success" di Firebase)_`;
 
     fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${telegramChatId}&text=${pesan}&parse_mode=Markdown&disable_web_page_preview=true`);
 }
