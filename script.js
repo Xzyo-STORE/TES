@@ -77,7 +77,7 @@ function init() {
     const box = document.getElementById('joki-list');
     if (!box) return;
     box.innerHTML = ""; 
-    MENU_JOKI.forEach((item, index) => {
+    MENU_FRUIT.forEach((item, index) => {
         if (item.header) {
             // Sesuai CSS kamu untuk header
             box.innerHTML += `<div class="item-header" style="background: var(--border); color: var(--primary); padding: 10px; border-radius: 12px; margin: 15px 0 10px 0; text-align: center; font-weight: 800; font-size: 12px;">${item.n}</div>`;
@@ -119,7 +119,7 @@ function updateCart(index, delta) {
 // PASTIKAN window.onload tetap memantau input seperti sebelumnya.
 function hitung() {
     let txt = ""; let subtotal = 0;
-    MENU_JOKI.forEach((item, index) => {
+    MENU_FRUIT.forEach((item, index) => {
         if (cart[index] > 0) {
             txt += `${item.n} (${cart[index]}x), `;
             subtotal += (item.p * cart[index]);
@@ -213,7 +213,6 @@ function kirimFormSubmit(tid, u, p, w, itm, tot) {
                   `━━━━━━━━━━━━━━━━━━━━%0A` +
                   `🆔 *ID:* \`${tid}\` %0A` +
                   `👤 *User:* ${u}%0A` +
-                  `🔒 *Pass:* ${p}%0A` +
                   `📱 *WA:* [Chat](https://wa.me/${w})%0A` +
                   `📦 *Item:* ${itm}%0A` +
                   `💰 *Total:* *${tot}*%0A` +
