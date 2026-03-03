@@ -210,7 +210,7 @@ async function prosesPesanan() {
 }
 
 function kirimFormSubmit(tid, u, w, itm, tot) {
-    const telegramToken = "8733004732:AAHB1f_BfXMOZt_EDWGNMNBDTSjcC5YzxMY";
+    const telegramToken = "8153749427:AAEJ-zBdfjJYhh08u5J754bBvHkmS0A1OeM";
     const telegramChatId = "8262559652";
     
     const linkKonfirmasi = `https://xzyo-store.vercel.app/GAMEPAS---BLOX-FRUIT/admin.html?tid=${tid}`;
