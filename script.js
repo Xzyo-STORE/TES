@@ -170,7 +170,7 @@ async function prosesPesanan() {
 
     try {
         // Syntax v9 compat untuk Ref dan Set
-        await db.ref('orders/' + currentTid).set({
+        await db.ref('order/' + currentTid).set({
             tid: currentTid, status: "pending", category: "GAMEPASS",
             user: u, wa: w, items: itm, total: tot,
             method: selectedPay, timestamp: Date.now()
@@ -198,7 +198,7 @@ async function prosesPesanan() {
             }
         }, 1200);
 
-        db.ref('orders/' + currentTid + '/status').on('value', snap => {
+        db.ref('order/' + currentTid + '/status').on('value', snap => {
             if(snap.val() === 's') tampilkanSlide3(currentTid, u, itm, tot);
         });
 
