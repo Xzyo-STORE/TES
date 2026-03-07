@@ -178,26 +178,45 @@ async function prosesPesanan() {
         
         kirimFormSubmit(currentTid, u, w, itm, tot);
         
-        setTimeout(() => {
+         setTimeout(() => {
             loader.style.display = 'none';
-            switchSlide(1, 2); 
+            switchSlide(1, 2);
             document.getElementById('payNominal').innerText = tot;
             document.getElementById('displayTid').innerText = currentTid;
+
+            const qrisBox = document.getElementById('qris-display');
             const infoTeks = document.getElementById('payMethodInfo');
             const gbrQR = document.getElementById('gambar-qris');
-            
+            const linkQRIS = "https://i.ibb.co.com/Y4bRyxjc/IMG-20260227-021950.png";
+            const paymentBox = document.getElementById('payment-display')
+            const walletNumber = document.getElementById('wallet-number')
+            const Dana = "089677329404";
+            const OvoGopay = "089517154561";
+
             if (selectedPay === "QRIS") {
                 infoTeks.innerText = "QRIS";
-                if (gbrQR) gbrQR.src = "https://i.ibb.co.com/Y4bRyxjc/IMG-20260227-021950.png";
-                document.getElementById('qris-display').style.display = "block"; 
-            } else {
-                document.getElementById('qris-display').style.display = "none"; 
-                if (selectedPay === "DANA") infoTeks.innerText = "DANA: 089677329404";
-                else if (selectedPay === "OVO") infoTeks.innerText = "OVO: 089517154561";
-                else if (selectedPay === "GOPAY") infoTeks.innerText = "GOPAY: 089517154561";
+                gbrQR.src = linkQRIS;
+                qrisBox.style.display = "block";
+                walletNumber.style.display = "none";
             }
-        }, 1200);
-
+            else {
+                paymentBox.style.display = "block";
+                gbrQR.style.display = "none";       // Gambar Sembunyi
+                walletNumber.style.display = "block"; // Teks Nomor Muncul
+                if (selectedPay === "DANA") {
+                    infoTeks.innerText = "DANA";
+                    walletNumber.innerText = Dana;
+                }
+                else if (selectedPay === "OVO"){
+                    infoTeks.innerText = "OVO";
+                    walletNumber.innerText = OvoGopay;
+                }
+                else if (selectedPay === "GOPAY") {
+                    infoTeks.innerText = "GOPAY";
+                    walletNumber.innerText = OvoGopay;
+                }
+            }
+        }, 1500);
         db.ref('orders/' + currentTid + '/status').on('value', snap => {
             if(snap.val() === 's') tampilkanSlide3(currentTid, u, itm, tot);
         });
