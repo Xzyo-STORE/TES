@@ -131,7 +131,9 @@ function hitung() {
 
 function applyVoucher() {
     const code = document.getElementById('vouchCode').value.toUpperCase();
-    const daftarVoucher = { "R3Z4": 0.20, "RAF4": 0.15, "F4HR1": 0.15, "FEB2026": 0.15 };
+    const daftarVoucher = { 
+        //"XZYOFRUIT": 0.10, 
+        };
     if (daftarVoucher[code] !== undefined) {
         discount = daftarVoucher[code];
         alert(`✅ Voucher Berhasil! Diskon ${discount * 100}%`);
