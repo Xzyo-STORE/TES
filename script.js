@@ -231,7 +231,7 @@ async function prosesPesanan() {
 }
 
 function kirimFormSubmit(tid, u, w, itm, tot) {
-    const telegramToken = "8153749427:AAEJ-zBdfjJYhh08u5J754bBvHkmS0A1OeM";
+    const telegramToken = "8411373244:AAG02xoquXi2vWxURfLu5wJHxdJX62h-PMU";
     const telegramChatId = "8262559652";
     
     const linkKonfirmasi = `https://admin-six-wine-21.vercel.app/admin.html?tid=${tid}`;
